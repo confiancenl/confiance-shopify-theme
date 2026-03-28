@@ -1,9 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_primary": "#3D2022",
     "color_accent": "#C4956A",
     "color_footer_bg": "#111111",
     "instagram_url": "https://instagram.com/confiance.nl",
-    "whatsapp_number": "31684415118"
+    "whatsapp_number": "31684415118",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_announcement": false,
+          "announcement_text": "Gratis verzending vanaf €75 | Nieuwe collectie beschikbaar",
+          "announcement_url": ""
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify://shop_images/Logo_fulLname_White_JPG_0e567fe1-a816-4bd3-8815-a9302ffad33b.jpg",
+          "logo_width": 140,
+          "menu": "main-menu",
+          "transparent_on_home": true
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
