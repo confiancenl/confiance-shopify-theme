@@ -1,0 +1,41 @@
+<section class="contact-page">
+  <div class="container">
+    <h1>CONTACT</h1>
+    <div class="contact-page__grid">
+      <div class="contact-page__info">
+        <h2>Neem contact op</h2>
+        <p>Heb je een vraag over je bestelling, retour of iets anders? Neem gerust contact op.</p>
+        <div class="contact-detail"><strong>Email</strong><a href="mailto:info@confiance.nl">info@confiance.nl</a></div>
+        <div class="contact-detail"><strong>WhatsApp</strong><a href="https://wa.me/31684415118" target="_blank">+31 6 84 41 51 18</a></div>
+        <div class="contact-detail"><strong>Reactietijd</strong><span>Binnen 24 uur</span></div>
+      </div>
+      <div class="contact-page__form">
+        {% form 'contact' %}
+          {% if form.posted_successfully? %}
+            <p class="form-success">Bedankt! We nemen zo snel mogelijk contact op.</p>
+          {% endif %}
+          <div class="form-group">
+            <label>Naam</label>
+            <input type="text" name="contact[name]" placeholder="Jouw naam" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="contact[email]" placeholder="jouw@email.nl" required>
+          </div>
+          <div class="form-group">
+            <label>Bericht</label>
+            <textarea name="contact[body]" rows="5" placeholder="Jouw bericht..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Versturen</button>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact",
+  "settings": []
+}
+{% endschema %}

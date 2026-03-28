@@ -1,0 +1,39 @@
+<section class="cart-page">
+  <div class="container">
+    <h1 class="cart-page__title">WINKELWAGEN</h1>
+    {% if cart.item_count > 0 %}
+      {% form 'cart' %}
+        <div class="cart-page__items">
+          {% for item in cart.items %}
+            {% render 'cart-item', item: item %}
+          {% endfor %}
+        </div>
+        <div class="cart-page__summary">
+          <div class="cart-page__subtotal">
+            <span>Subtotaal</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          {% if cart.total_price < 7500 %}
+            <p class="cart-page__shipping-note">Gratis verzending bij bestelling boven €75,00</p>
+          {% else %}
+            <p class="cart-page__shipping-note cart-page__shipping-free">✓ Gratis verzending!</p>
+          {% endif %}
+          <button type="submit" name="checkout" class="btn-primary btn-checkout">AFREKENEN</button>
+          <a href="/collections/all" class="cart-page__continue">← Verder winkelen</a>
+        </div>
+      {% endform %}
+    {% else %}
+      <div class="cart-page__empty">
+        <p>Je winkelwagen is leeg.</p>
+        <a href="/collections/all" class="btn-primary">Shop de collectie</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Winkelwagen",
+  "settings": []
+}
+{% endschema %}

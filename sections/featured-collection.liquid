@@ -1,0 +1,96 @@
+{% comment %} Featured Collection Section {% endcomment %}
+
+{%- assign featured_collection = collections[section.settings.collection] -%}
+
+<section class="featured-collection" aria-labelledby="FeaturedCollectionTitle">
+  <div class="container">
+    <div class="featured-collection__header">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="section-title" id="FeaturedCollectionTitle">{{ section.settings.title | default: 'Uitgelicht' }}</h2>
+      </div>
+      {%- if section.settings.show_view_all and featured_collection != blank -%}
+        <a href="{{ featured_collection.url }}" class="featured-collection__view-all">
+          ALLES BEKIJKEN →
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+      <div class="product-grid">
+        {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+    {%- elsif section.settings.collection == blank -%}
+      <div class="product-grid">
+        {%- for product in collections.all.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product %}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="color:var(--color-text-muted);text-align:center;padding:40px 0;">
+        Geen producten gevonden in deze collectie.
+      </p>
+    {%- endif -%}
+
+    {%- if section.settings.show_view_all and featured_collection != blank -%}
+      <div class="text-center" style="text-align:center;margin-top:40px;" class="hide-desktop">
+        <a href="{{ featured_collection.url }}" class="btn-ghost">ALLES BEKIJKEN →</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Uitgelichte collectie",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Boventitel",
+      "default": "Bestsellers"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Sectietitel",
+      "default": "Uitgelicht"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collectie"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 2,
+      "default": 4,
+      "label": "Aantal producten"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "\"Alles bekijken\" tonen",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Uitgelichte collectie",
+      "settings": {
+        "eyebrow": "Bestsellers",
+        "title": "Uitgelicht",
+        "products_to_show": 4
+      }
+    }
+  ]
+}
+{% endschema %}

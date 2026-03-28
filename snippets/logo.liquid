@@ -1,0 +1,32 @@
+{% comment %}
+  Logo snippet — CONFIANCE with crosshair O
+  Usage: {% render 'logo', variant: 'dark' %}  (dark = bordeaux on white, light = white on bordeaux)
+{% endcomment %}
+
+{% assign logo_variant = variant | default: 'dark' %}
+{% assign text_color = '#3D2022' %}
+{% if logo_variant == 'light' %}
+  {% assign text_color = '#FFFFFF' %}
+{% endif %}
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 44" aria-label="CONFIANCE" role="img" style="height:36px;width:auto;display:block;">
+  <title>CONFIANCE</title>
+
+  <!-- C -->
+  <text x="0" y="34" font-family="'Inter', sans-serif" font-weight="700" font-size="32" fill="{{ text_color }}" letter-spacing="1">C</text>
+
+  <!-- Crosshair O — centered at x=34, y=20 -->
+  <g transform="translate(34, 22)">
+    <!-- Circle -->
+    <circle cx="0" cy="0" r="14" stroke="{{ text_color }}" stroke-width="2" fill="none"/>
+    <!-- Vertical line -->
+    <line x1="0" y1="-20" x2="0" y2="20" stroke="{{ text_color }}" stroke-width="1.2"/>
+    <!-- Horizontal line -->
+    <line x1="-20" y1="0" x2="20" y2="0" stroke="{{ text_color }}" stroke-width="1.2"/>
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="2.5" fill="{{ text_color }}"/>
+  </g>
+
+  <!-- NFIANCE -->
+  <text x="58" y="34" font-family="'Inter', sans-serif" font-weight="700" font-size="32" fill="{{ text_color }}" letter-spacing="1">NFIANCE</text>
+</svg>

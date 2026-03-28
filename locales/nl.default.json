@@ -1,0 +1,5 @@
+{
+  "general": {
+    "pagination": { "previous": "Vorige", "next": "Volgende" }
+  }
+}

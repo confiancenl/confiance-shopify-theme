@@ -1,0 +1,36 @@
+{% comment %} Announcement Bar {% endcomment %}
+
+{%- if section.settings.show_announcement and section.settings.announcement_text != blank -%}
+  <div class="announcement-bar" style="display:block;" role="status" aria-live="polite">
+    {%- if section.settings.announcement_url != blank -%}
+      <a href="{{ section.settings.announcement_url }}">{{ section.settings.announcement_text }}</a>
+    {%- else -%}
+      {{ section.settings.announcement_text }}
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Aankondigingsbalk",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Aankondigingsbalk tonen",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Tekst",
+      "default": "Gratis verzending vanaf €75 | Nieuwe collectie beschikbaar"
+    },
+    {
+      "type": "url",
+      "id": "announcement_url",
+      "label": "Link (optioneel)"
+    }
+  ]
+}
+{% endschema %}

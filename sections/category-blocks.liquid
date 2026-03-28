@@ -1,0 +1,147 @@
+{% comment %} Category Blocks Section — 4 grid blocks {% endcomment %}
+
+<section class="category-blocks" aria-label="Categorieën">
+  <div class="container">
+    {%- if section.settings.eyebrow != blank or section.settings.title != blank -%}
+      <div class="section-header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="section-title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="category-blocks__grid">
+      {%- for block in section.blocks -%}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="category-block"
+          {{ block.shopify_attributes }}
+          aria-label="{{ block.settings.title }}"
+        >
+          {%- if block.settings.image != blank -%}
+            <img
+              class="category-block__image"
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+              width="600"
+              height="800"
+              loading="lazy"
+            >
+          {%- else -%}
+            <!-- Crosshair watermark (placeholder) -->
+            <div class="category-block__watermark" aria-hidden="true">
+              <svg viewBox="0 0 120 120" fill="none" stroke="#3D2022" stroke-width="1">
+                <circle cx="60" cy="60" r="56"/>
+                <line x1="60" y1="4" x2="60" y2="116"/>
+                <line x1="4" y1="60" x2="116" y2="60"/>
+                <circle cx="60" cy="60" r="10"/>
+                <circle cx="60" cy="60" r="3" fill="#3D2022"/>
+              </svg>
+            </div>
+          {%- endif -%}
+
+          <div class="category-block__overlay"></div>
+
+          <div class="category-block__content">
+            {%- if block.settings.title != blank -%}
+              <h3 class="category-block__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.subtitle != blank -%}
+              <p class="category-block__sub">{{ block.settings.subtitle }}</p>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Categorie blokken",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Boventitel",
+      "default": "Shop per categorie"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Sectietitel",
+      "default": "De Collectie"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Categorie",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Afbeelding"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel",
+          "default": "T-Shirts"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Ondertitel",
+          "default": "Basics & Essentials"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categorie blokken",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "T-Shirts",
+            "subtitle": "Basics & Essentials"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Hoodies",
+            "subtitle": "Premium Kwaliteit"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Joggers",
+            "subtitle": "Comfort & Stijl"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Accessoires",
+            "subtitle": "Finishing Touch"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

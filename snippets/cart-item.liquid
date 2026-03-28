@@ -1,0 +1,66 @@
+{% comment %}
+  Cart Item Snippet — used in cart-template.liquid (full cart page)
+  Requires: item (cart line item)
+{% endcomment %}
+
+<div class="cart-page__item" data-key="{{ item.key }}">
+  <div class="cart-item">
+    {%- if item.image -%}
+      <img
+        class="cart-item__image"
+        src="{{ item.image | image_url: width: 160 }}"
+        alt="{{ item.image.alt | default: item.title | escape }}"
+        width="80"
+        height="106"
+        loading="lazy"
+      >
+    {%- else -%}
+      <div class="cart-item__image" style="background:var(--color-surface);width:80px;aspect-ratio:3/4;"></div>
+    {%- endif -%}
+
+    <div class="cart-item__details">
+      <a href="{{ item.url }}" class="cart-item__title">{{ item.product_title }}</a>
+
+      {%- unless item.variant.title == 'Default Title' -%}
+        <div class="cart-item__variant">{{ item.variant.title }}</div>
+      {%- endunless -%}
+
+      {%- if item.properties != blank -%}
+        {%- for property in item.properties -%}
+          {%- unless property.last == blank -%}
+            <div class="cart-item__variant">{{ property.first }}: {{ property.last }}</div>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+
+      <div class="cart-item__price">{{ item.final_line_price | money }}</div>
+
+      <div class="cart-item__actions">
+        <div class="cart-item__qty">
+          <button
+            class="cart-item__qty-btn"
+            data-cart-qty-btn
+            data-key="{{ item.key }}"
+            data-delta="-1"
+            aria-label="Verminder hoeveelheid"
+          >−</button>
+          <span class="cart-item__qty-count" data-qty-count="{{ item.key }}">{{ item.quantity }}</span>
+          <button
+            class="cart-item__qty-btn"
+            data-cart-qty-btn
+            data-key="{{ item.key }}"
+            data-delta="1"
+            aria-label="Verhoog hoeveelheid"
+          >+</button>
+        </div>
+        <button
+          class="cart-item__remove"
+          onclick="changeQty('{{ item.key }}', 0); this.closest('.cart-page__item').remove(); location.reload();"
+          aria-label="Verwijder {{ item.product_title | escape }}"
+        >
+          Verwijder
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

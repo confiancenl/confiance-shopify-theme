@@ -1,0 +1,19 @@
+<section class="brand-statement">
+  <div class="container">
+    <p class="brand-statement__quote">{{ section.settings.quote | default: 'Confidence looks good on you.' }}</p>
+    <a href="{{ section.settings.button_url | default: '/collections/all' }}" class="btn-outline">
+      {{ section.settings.button_text | default: 'Shop de collectie' }}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Merkverhaal",
+  "settings": [
+    { "type": "text", "id": "quote", "label": "Quote", "default": "Confidence looks good on you." },
+    { "type": "text", "id": "button_text", "label": "Knoptekst", "default": "Shop de collectie" },
+    { "type": "url", "id": "button_url", "label": "Knop URL" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "product": { "type": "product-template", "settings": {} }
+  },
+  "order": ["product"]
+}

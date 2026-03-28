@@ -1,0 +1,19 @@
+{
+  "general": {
+    "pagination": { "previous": "Vorige", "next": "Volgende" },
+    "search": { "placeholder": "Zoeken..." }
+  },
+  "cart": {
+    "title": "Winkelwagen",
+    "empty": "Je winkelwagen is leeg.",
+    "checkout": "Afrekenen",
+    "subtotal": "Subtotaal"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Toevoegen aan winkelwagen",
+      "sold_out": "Uitverkocht",
+      "unavailable": "Niet beschikbaar"
+    }
+  }
+}

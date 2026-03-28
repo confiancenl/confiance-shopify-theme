@@ -1,0 +1,163 @@
+{% comment %} Hero Banner Section {% endcomment %}
+
+<section
+  class="hero-banner{% if section.settings.image == blank %} hero-banner--no-image{% endif %}"
+  style="min-height: {{ section.settings.height }}vh;"
+  aria-label="Hero banner"
+>
+  {%- if section.settings.image != blank -%}
+    <img
+      class="hero-banner__bg"
+      src="{{ section.settings.image | image_url: width: 1920 }}"
+      srcset="{{ section.settings.image | image_url: width: 768 }} 768w, {{ section.settings.image | image_url: width: 1200 }} 1200w, {{ section.settings.image | image_url: width: 1920 }} 1920w"
+      alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
+      width="1920"
+      height="1080"
+      loading="eager"
+      fetchpriority="high"
+    >
+    <div class="hero-banner__overlay" style="background: rgba(0,0,0,{{ section.settings.overlay_opacity | divided_by: 100.0 }});"></div>
+  {%- endif -%}
+
+  <div class="hero-banner__content">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="hero-banner__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h1 class="hero-banner__title" style="font-size: clamp(3.5rem, {{ section.settings.title_size }}vw, {{ section.settings.title_max_size }}rem);">
+        {{ section.settings.title }}
+      </h1>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="hero-banner__subtitle">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <a
+        href="{{ section.settings.button_url | default: routes.all_products_collection_url }}"
+        class="{% if section.settings.button_style == 'outline' %}btn-outline{% else %}btn-primary{% endif %}"
+      >
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_scroll -%}
+    <div class="hero-banner__scroll" aria-hidden="true">
+      <span class="hero-banner__scroll-text">Scroll</span>
+      <div class="hero-banner__scroll-line"></div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Achtergrondafbeelding"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 35,
+      "unit": "%",
+      "label": "Overlay donkerte"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "default": 90,
+      "unit": "vh",
+      "label": "Hoogte"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Boventitel",
+      "default": "Premium Streetwear"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titel",
+      "default": "CONFIANCE"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 6,
+      "max": 20,
+      "step": 1,
+      "default": 14,
+      "unit": "vw",
+      "label": "Titelgrootte (vw)"
+    },
+    {
+      "type": "range",
+      "id": "title_max_size",
+      "min": 6,
+      "max": 18,
+      "step": 1,
+      "default": 11,
+      "unit": "rem",
+      "label": "Max titelgrootte"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Ondertitel",
+      "default": "Kleding die spreekt zonder woorden"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Knoptekst",
+      "default": "SHOP NU"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Knoplink"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Knopstijl",
+      "options": [
+        { "value": "primary", "label": "Gevuld (bordeaux)" },
+        { "value": "outline", "label": "Omrand (wit)" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll",
+      "label": "Scroll-indicator tonen",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero banner",
+      "settings": {
+        "eyebrow": "Premium Streetwear",
+        "title": "CONFIANCE",
+        "subtitle": "Kleding die spreekt zonder woorden",
+        "button_label": "SHOP NU"
+      }
+    }
+  ]
+}
+{% endschema %}

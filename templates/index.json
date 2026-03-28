@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "hero": { "type": "hero-banner", "settings": {} },
+    "featured": { "type": "featured-collection", "settings": {} },
+    "categories": { "type": "category-blocks", "settings": {} },
+    "brand": { "type": "brand-statement", "settings": {} },
+    "newsletter": { "type": "newsletter", "settings": {} }
+  },
+  "order": ["hero", "featured", "categories", "brand", "newsletter"]
+}

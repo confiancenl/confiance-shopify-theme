@@ -1,0 +1,23 @@
+<section class="newsletter">
+  <div class="container newsletter__inner">
+    <h2 class="newsletter__title">{{ section.settings.title | default: 'Wees de eerste bij nieuwe drops' }}</h2>
+    <p class="newsletter__subtitle">{{ section.settings.subtitle | default: 'Meld je aan en ontvang 10% korting op je eerste bestelling.' }}</p>
+    {% form 'customer' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="newsletter__form">
+        <input type="email" name="contact[email]" placeholder="jouw@email.nl" required class="newsletter__input">
+        <button type="submit" class="btn-primary">Aanmelden</button>
+      </div>
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Nieuwsbrief",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titel", "default": "Wees de eerste bij nieuwe drops" },
+    { "type": "text", "id": "subtitle", "label": "Subtitel", "default": "Meld je aan en ontvang 10% korting op je eerste bestelling." }
+  ]
+}
+{% endschema %}

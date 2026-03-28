@@ -1,0 +1,33 @@
+<section class="collection-page">
+  <div class="container">
+    <h1 class="collection-page__title">{{ collection.title | upcase }}</h1>
+    {% if collection.description != blank %}
+      <p class="collection-page__desc">{{ collection.description }}</p>
+    {% endif %}
+    <div class="collection-filter">
+      <a href="/collections/all" class="filter-pill {% if collection.handle == 'all' %}active{% endif %}">Alles</a>
+      {% for tag in collection.all_tags %}
+        <a href="/collections/{{ collection.handle }}/{{ tag | handle }}" class="filter-pill {% if current_tags contains tag %}active{% endif %}">{{ tag }}</a>
+      {% endfor %}
+    </div>
+    <div class="product-grid">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product %}
+      {% else %}
+        <p>Geen producten gevonden.</p>
+      {% endfor %}
+    </div>
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {{ paginate | default_pagination }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collectie",
+  "settings": []
+}
+{% endschema %}
